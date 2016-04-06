@@ -7,12 +7,12 @@ install_mac:
 
 plan:
 	bin/terraform plan \
-		-state=terraform.tfstate \
+		-state=state/terraform.tfstate \
 		-refresh=true \
 		terraform/
 
 apply:
 	bin/terraform apply \
-		-state=terraform.tfstate \
+		-state=state/terraform.tfstate \
 		-refresh=true \
 		terraform/
