@@ -6,7 +6,13 @@ install_mac:
 	rm /tmp/terraform_0.6.14_darwin_amd64.zip
 
 plan:
-	bin/terraform plan
+	bin/terraform plan \
+		-state=terraform.tfstate \
+		-refresh=true \
+		terraform/
 
 apply:
-	bin/terraform apply
+	bin/terraform apply \
+		-state=terraform.tfstate \
+		-refresh=true \
+		terraform/
