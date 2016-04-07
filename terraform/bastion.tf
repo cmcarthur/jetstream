@@ -13,17 +13,6 @@ resource "aws_instance" "bastion" {
   tags {
 	Name = "bastion"
   }
-
-  connection {
-	type = "ssh"
-	user = "ubuntu"
-	private_key = "~/.ssh/id_rsa"
-  }
-
-  provisioner "file" {
-	source = "files/test"
-	destination = "/tmp/test"
-  }
 }
 
 output "bastion_ip" {

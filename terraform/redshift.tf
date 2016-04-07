@@ -38,3 +38,15 @@ resource "aws_redshift_subnet_group" "main" {
 	"${aws_subnet.private_us_east_1b.id}"
   ]
 }
+
+output "redshift_database_name" {
+  value = "${aws_redshift_cluster.redash.database_name}"
+}
+
+output "redshift_host" {
+  value = "${aws_redshift_cluster.redash.endpoint}"
+}
+
+output "redshift_port" {
+  value = "${aws_redshift_cluster.redash.port}"
+}

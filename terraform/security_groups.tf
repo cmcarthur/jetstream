@@ -1,21 +1,6 @@
 #
 # VPC Internal Security Groups
 #
-resource "aws_security_group" "internal_postgres" {
-  name = "internal_postgres"
-  description = "Internal Postgres Access"
-  vpc_id = "${aws_vpc.main.id}"
-
-  ingress {
-	from_port = 5432
-	to_port = 5432
-	protocol = "tcp"
-	cidr_blocks = [
-	  "${aws_vpc.main.cidr_block}"
-	]
-  }
-}
-
 resource "aws_security_group" "internal_redshift" {
   name = "internal_redshift"
   description = "Internal Redshift Access"
@@ -28,6 +13,13 @@ resource "aws_security_group" "internal_redshift" {
 	cidr_blocks = [
 	  "${aws_vpc.main.cidr_block}"
 	]
+  }
+
+  egress {
+	from_port = 0
+	to_port = 0
+	protocol = "-1"
+	cidr_blocks = ["0.0.0.0/0"]
   }
 }
 
@@ -45,6 +37,13 @@ resource "aws_security_group" "internal_http" {
 	  "${aws_vpc.main.cidr_block}"
 	]
   }
+
+  egress {
+	from_port = 0
+	to_port = 0
+	protocol = "-1"
+	cidr_blocks = ["0.0.0.0/0"]
+  }
 }
 
 resource "aws_security_group" "internal_ssh" {
@@ -59,6 +58,13 @@ resource "aws_security_group" "internal_ssh" {
 	cidr_blocks = [
 	  "${aws_vpc.main.cidr_block}"
 	]
+  }
+
+  egress {
+	from_port = 0
+	to_port = 0
+	protocol = "-1"
+	cidr_blocks = ["0.0.0.0/0"]
   }
 }
 
@@ -78,6 +84,13 @@ resource "aws_security_group" "whitelisted_http" {
 	  "${split(",", var.whitelisted_ips)}"
 	]
   }
+
+  egress {
+	from_port = 0
+	to_port = 0
+	protocol = "-1"
+	cidr_blocks = ["0.0.0.0/0"]
+  }
 }
 
 resource "aws_security_group" "public_http" {
@@ -93,6 +106,13 @@ resource "aws_security_group" "public_http" {
 	  "0.0.0.0/0"
 	]
   }
+
+  egress {
+	from_port = 0
+	to_port = 0
+	protocol = "-1"
+	cidr_blocks = ["0.0.0.0/0"]
+  }
 }
 
 resource "aws_security_group" "whitelisted_ssh" {
@@ -107,5 +127,12 @@ resource "aws_security_group" "whitelisted_ssh" {
 	cidr_blocks = [
 	  "${split(",", var.whitelisted_ips)}"
 	]
+  }
+
+  egress {
+	from_port = 0
+	to_port = 0
+	protocol = "-1"
+	cidr_blocks = ["0.0.0.0/0"]
   }
 }

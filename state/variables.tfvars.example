@@ -8,3 +8,5 @@ redash_backend_username = "root"
 redash_backend_password = "" # generate a secure password
 
 public_key_path = "~/.ssh/id_rsa.pub"
+
+redash_admin_password = "admin"
