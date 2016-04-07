@@ -16,3 +16,6 @@ apply:
 		-state=state/terraform.tfstate \
 		-refresh=true \
 		terraform/
+
+ssh:
+	@ssh "ubuntu@$$(bin/terraform output -state=state/terraform.tfstate bastion_ip)"
