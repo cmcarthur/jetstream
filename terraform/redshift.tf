@@ -6,15 +6,15 @@ resource "aws_redshift_cluster" "redash" {
   publicly_accessible = false
 
   vpc_security_group_ids = [
-	"${aws_security_group.redshift.id}"
+	"${aws_security_group.internal_redshift.id}"
   ]
 
   cluster_subnet_group_name = "${aws_redshift_subnet_group.main.name}"
   cluster_parameter_group_name = "${aws_redshift_parameter_group.redash.name}"
 
-  master_username = "root"
-  master_password = "P4$sWord"
-  database_name = "redash"
+  master_username = "${var.redshift_master_username}"
+  master_password = "${var.redshift_master_password}"
+  database_name = "${var.redshift_database_name}"
   port = 5439
 }
 
@@ -29,29 +29,12 @@ resource "aws_redshift_parameter_group" "redash" {
   }
 }
 
-resource "aws_security_group" "redshift" {
-  name = "redshift"
-  description = "Default security group"
-  vpc_id = "${aws_vpc.main.id}"
-
-  ingress {
-	from_port = 5439
-	to_port = 5439
-	protocol = "tcp"
-	cidr_blocks = [
-	  "${aws_vpc.main.cidr_block}",
-	  "68.83.229.62/32", # Connor Home IP
-	  "108.16.231.215/32" # Tristan Home IP
-	]
-  }
-}
-
 resource "aws_redshift_subnet_group" "main" {
   name = "main"
   description = "Main redshift subnet group"
 
   subnet_ids = [
-	"${aws_subnet.public_us_east_1a.id}",
-	"${aws_subnet.public_us_east_1b.id}"
+	"${aws_subnet.private_us_east_1a.id}",
+	"${aws_subnet.private_us_east_1b.id}"
   ]
 }

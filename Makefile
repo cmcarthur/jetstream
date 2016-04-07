@@ -8,12 +8,14 @@ install_mac:
 plan:
 	bin/terraform plan \
 		-state=state/terraform.tfstate \
+		-var-file=state/variables.tfvars \
 		-refresh=true \
 		terraform/
 
 apply:
 	bin/terraform apply \
 		-state=state/terraform.tfstate \
+		-var-file=state/variables.tfvars \
 		-refresh=true \
 		terraform/
 

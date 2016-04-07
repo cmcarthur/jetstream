@@ -1,0 +1,10 @@
+whitelisted_ips = "" # output of `curl icanhazip.com` in CIDR format (add trailing /32)
+
+redshift_master_username = "root"
+redshift_master_password = "" # generate a secure password
+redshift_database_name = "" # pick a database name
+
+redash_backend_username = "root"
+redash_backend_password = "" # generate a secure password
+
+public_key_path = "~/.ssh/id_rsa.pub"
