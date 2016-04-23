@@ -1,3 +1,2 @@
-bin/
 state/*
 !state/variables.tfvars.example
