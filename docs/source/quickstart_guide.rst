@@ -16,7 +16,7 @@ AWS Credentials
 
 There are two ways to get AWS credentials installed -- you can use the **AWS CLI**, or just manually write an **AWS credentials file**.
 
-**AWS CLI**
+**AWS CLI** (Recommended)
 
 First, install the CLI with:
 
