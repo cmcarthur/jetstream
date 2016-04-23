@@ -1,6 +1,6 @@
 ### Getting Started
 
-See the [documentation](jetstream-docs.readthedocs.org).
+See the [documentation](https://jetstream-docs.readthedocs.org).
 
 ### TODOs
 
