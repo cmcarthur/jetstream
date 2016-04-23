@@ -8,7 +8,7 @@ To get started, you will need:
 
 Once you have the above installed, you need to configure AWS locally:
 
-.. code-block: bash
+.. code-block:: bash
 
    aws configure --profile jetstream
 
@@ -16,7 +16,7 @@ Follow the prompts and copy in your AWS access key and secret.
 
 Next, set up your variables file:
 
-.. code-block: bash
+.. code-block:: bash
 
    cp state/variables.tfvars.example state/variables.tfvars
 
