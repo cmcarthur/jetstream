@@ -1,4 +1,6 @@
-Documentation can be found at: jetstream-docs.readthedocs.org
+### Getting Started
+
+See the [documentation](jetstream-docs.readthedocs.org).
 
 ### TODOs
 
