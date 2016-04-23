@@ -1,23 +1,27 @@
-.PHONY: install_mac plan apply
+.PHONY: plan apply
 
-install_mac:
-	wget "https://releases.hashicorp.com/terraform/0.6.14/terraform_0.6.14_darwin_amd64.zip" -P /tmp
-	unzip /tmp/terraform_0.6.14_darwin_amd64.zip -d bin/
-	rm /tmp/terraform_0.6.14_darwin_amd64.zip
+CURRENT_DIR := ${PWD}
 
 plan:
-	bin/terraform plan \
-		-state=state/terraform.tfstate \
-		-var-file=state/variables.tfvars \
-		-refresh=true \
-		terraform/
+	docker run --rm -v "$(CURRENT_DIR)":/data \
+		-v ~/.aws:/root/.aws \
+		-v ~/.ssh:/root/.ssh \
+		cmcarthur/jetstream \
+		plan -input=false \
+			 -state=/data/state/terraform.tfstate \
+			 -var-file=/data/state/variables.tfvars \
+			 -refresh=true \
+			 /data/terraform/
 
 apply:
-	bin/terraform apply \
-		-state=state/terraform.tfstate \
-		-var-file=state/variables.tfvars \
-		-refresh=true \
-		terraform/
+	docker run --rm -v "$(CURRENT_DIR)":/data cmcarthur/jetstream \
+		-v ~/.aws:/root/.aws \
+		-v ~/.ssh:/root/.ssh \
+		apply -input=false \
+			  -state=/data/state/terraform.tfstate \
+			  -var-file=/data/state/variables.tfvars \
+			  -refresh=true \
+			  /data/terraform/
 
 ssh:
 	@ssh -A "ubuntu@$$(bin/terraform output -state=state/terraform.tfstate bastion_ip)"

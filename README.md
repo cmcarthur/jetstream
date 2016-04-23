@@ -10,4 +10,12 @@ Then, edit the file appropriately and run `make plan`.
 
 ### TODOs
 
-- Create an /etc/hosts on bastion with all of the hostnames for generated instances
+- Write `configure` system for:
+  - SSH key
+  - AWS credentials
+  - Usernames & Passwords
+  - Switching DNS on/off
+- DNS
+  - Comment / uncomment
+  - Basic templating
+- Configuration UI
