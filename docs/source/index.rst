@@ -3,9 +3,14 @@ Welcome to Jetstream
 
 Documentation for Jetstream
 
-Indices and tables
-------------------
+* :ref:`user-docs`
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+.. _user-docs:
+
+.. toctree::
+   :maxdepth: 2
+   :caption: User Documentation
+
+   what_is_jetstream
+   quickstart_guide
+   faq
