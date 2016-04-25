@@ -3,13 +3,13 @@ resource "aws_redshift_cluster" "redash" {
   node_type = "dc1.large"
   cluster_type = "single-node"
 
-  publicly_accessible = false
+  publicly_accessible = true
 
   vpc_security_group_ids = [
-	"${aws_security_group.internal_redshift.id}"
+	"${aws_security_group.whitelisted_redshift.id}"
   ]
 
-  cluster_subnet_group_name = "${aws_redshift_subnet_group.main.name}"
+  cluster_subnet_group_name = "${aws_redshift_subnet_group.public.name}"
   cluster_parameter_group_name = "${aws_redshift_parameter_group.redash.name}"
 
   master_username = "${var.redshift_master_username}"
@@ -36,6 +36,16 @@ resource "aws_redshift_subnet_group" "main" {
   subnet_ids = [
 	"${aws_subnet.private_us_east_1a.id}",
 	"${aws_subnet.private_us_east_1b.id}"
+  ]
+}
+
+resource "aws_redshift_subnet_group" "public" {
+  name = "public"
+  description = "Public redshift subnet group"
+
+  subnet_ids = [
+	"${aws_subnet.public_us_east_1a.id}",
+	"${aws_subnet.public_us_east_1b.id}"
   ]
 }
 

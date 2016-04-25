@@ -115,6 +115,36 @@ resource "aws_security_group" "public_http" {
   }
 }
 
+resource "aws_security_group" "whitelisted_redshift" {
+  name = "whitelisted_redshift"
+  description = "Whitelisted Redshift Access"
+  vpc_id = "${aws_vpc.main.id}"
+
+  ingress {
+	from_port = 5439
+	to_port = 5439
+	protocol = "tcp"
+	cidr_blocks = [
+	  "${aws_instance.redash1.public_ip}/32"
+	]
+  }
+  ingress {
+	from_port = 5439
+	to_port = 5439
+	protocol = "tcp"
+	cidr_blocks = [
+	  "${split(",", var.whitelisted_ips)}"
+	]
+  }
+
+  egress {
+	from_port = 0
+	to_port = 0
+	protocol = "-1"
+	cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
 resource "aws_security_group" "whitelisted_ssh" {
   name = "whitelisted_ssh"
   description = "SSH Access for Whitelisted IPs"
