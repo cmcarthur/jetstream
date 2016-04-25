@@ -14,13 +14,13 @@ plan:
 			 /data/terraform/
 
 apply:
-	docker run --rm -v "$(CURRENT_DIR)":/data cmcarthur/jetstream \
+	docker run --rm -v "$(CURRENT_DIR)":/data \
 		-v ~/.aws:/root/.aws \
 		-v ~/.ssh:/root/.ssh \
-		apply -input=false \
+		cmcarthur/jetstream \
+		apply -input=true \
 			  -state=/data/state/terraform.tfstate \
 			  -var-file=/data/state/variables.tfvars \
-			  -refresh=true \
 			  /data/terraform/
 
 ssh:
