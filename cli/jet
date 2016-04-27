@@ -1,0 +1,54 @@
+#!/usr/bin/ruby
+
+require "open3"
+require "thor"
+
+class JetCLI < Thor
+  desc "plan", "example task"
+  def plan
+    cmd = <<CMD
+/usr/bin/terraform plan -input=false \
+                        -state=/data/state/terraform.tfstate \
+				        -var-file=/data/state/variables.tfvars \
+                        -refresh=true \
+                        /data/terraform
+CMD
+    _shell(cmd)
+  end
+
+  desc "apply", "example task"
+  def apply
+    cmd = <<CMD
+/usr/bin/terraform apply -input=false \
+                         -state=/data/state/terraform.tfstate \
+				         -var-file=/data/state/variables.tfvars \
+                         -refresh=true \
+                         /data/terraform
+CMD
+    _shell(cmd)
+  end
+
+
+
+  desc "login", "example task"
+  def login
+    cmd = <<CMD
+/usr/bin/terraform output -state=/data/state/terraform.tfstate bastion_ip
+CMD
+    _shell(cmd)
+    # TODO handle error if state file has no outputs
+  end
+
+  private
+
+  def _shell(cmd)
+    STDOUT.sync = true
+    Open3.popen3(cmd) do |stdin, stdout, stderr, thread|
+      while line=stdout.gets or line=stderr.gets
+        puts line
+      end
+    end
+  end
+end
+
+JetCLI.start(ARGV)
