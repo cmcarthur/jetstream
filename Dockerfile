@@ -45,4 +45,6 @@ RUN bundle install
 ENTRYPOINT ["/data/cli/jet"]
 
 VOLUME ["/data"]
-WORKDIR /data
+VOLUME ["/workdir"]
+
+WORKDIR /workdir
