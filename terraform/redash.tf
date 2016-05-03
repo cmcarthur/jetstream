@@ -1,5 +1,5 @@
 resource "aws_instance" "redash1" {
-  ami = "ami-a7ddfbcd"
+  ami = "ami-aeed0bc3"
   instance_type = "t2.micro"
 
   subnet_id = "${aws_subnet.public_us_east_1b.id}"
