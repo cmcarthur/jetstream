@@ -1,5 +1,3 @@
-#!/usr/bin/ruby
-
 require "fileutils"
 require "open3"
 require "thor"
@@ -31,7 +29,7 @@ module JetCLI
         end
       else
         Logger::info " - creating directory #{path}"
-        dir = Dir.mkdir(path)
+        Dir.mkdir(path)
         return true
       end
     end
@@ -93,13 +91,13 @@ module JetCLI
 
     def self.create_default!(name)
       default_config = {
-        :name => name,
-        :description => "",
-        :author => "you@you.com",
-        :version => "0.0.1",
-        :dependencies => {
-          :jetstream => "https://github.com/jetstream-ops/core#master"
-        }
+        "name" => name,
+        "description" => "an awesome package",
+        "author" => "@you",
+        "version" => "0.0.1",
+        "dependencies" => [
+          "base"
+        ]
       }
 
       Shell::create_file(

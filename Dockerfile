@@ -42,7 +42,7 @@ COPY cli/Gemfile* /tmp/
 WORKDIR /tmp
 RUN bundle install
 
-ENTRYPOINT ["/data/cli/jet"]
+ENTRYPOINT ["/data/cli/bin/jet"]
 
 VOLUME ["/data"]
 VOLUME ["/workdir"]

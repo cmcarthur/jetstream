@@ -15,5 +15,7 @@ docker run --rm \
        -v "$SCRIPT_DIR":/data \
        -v "$WORKING_DIR":/workdir \
 	   -v ~/.ssh:/root/.ssh \
+       --workdir="/data/cli" \
+       --entrypoint="/usr/local/bin/rake" \
 	   cmcarthur/jetstream \
-	   "$@"
+       test
