@@ -8,7 +8,8 @@ done
 DIR="$( cd -P "$( dirname "$SOURCE" )"/.. && pwd )"
 
 docker run --rm -v "$DIR":/data \
-	   -v ~/.aws:/root/.aws \
-	   -v ~/.ssh:/root/.ssh \
-	   cmcarthur/jetstream \
-	   "$@"
+       -v ~/.aws:/root/.aws \
+       -v ~/.ssh:/root/.ssh \
+       -it \
+       cmcarthur/jetstream \
+       "$@"
