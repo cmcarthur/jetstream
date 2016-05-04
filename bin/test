@@ -10,12 +10,12 @@ SCRIPT_DIR="$(cd -P "$( dirname "$SOURCE" )"/.. && pwd)"
 WORKING_DIR="$(pwd)"
 
 docker run --rm \
-       -it \
+      -it \
        -u $(id -u):$(id -g) \
        -v "$SCRIPT_DIR":/data \
        -v "$WORKING_DIR":/workdir \
-	   -v ~/.ssh:/root/.ssh \
+       -v ~/.ssh:/root/.ssh \
        --workdir="/data/cli" \
        --entrypoint="/usr/local/bin/rake" \
-	   cmcarthur/jetstream \
+       cmcarthur/jetstream \
        test
