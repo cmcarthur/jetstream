@@ -31,13 +31,13 @@ resource "aws_db_subnet_group" "public" {
 resource "aws_db_instance" "default" {
   allocated_storage    = 10
   engine               = "postgres"
-  engine_version       = "9.3"
+  engine_version       = "9.4.7"
   instance_class       = "db.t2.micro"
   name                 = "redash_backend"
   username             = "${var.redash_backend_username}"
   password             = "${var.redash_backend_password}"
-  db_subnet_group_name = "my_database_subnet_group"
-  parameter_group_name = "default.postgres9.3"
+  db_subnet_group_name = "${aws_db_subnet_group.public.name}"
+  parameter_group_name = "default.postgres9.4"
   vpc_security_group_ids = [
     "${aws_security_group.whitelisted_postgres.id}"
   ]

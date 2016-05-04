@@ -66,6 +66,8 @@ resource "aws_route_table_association" "private_us_east_1b" {
 resource "aws_internet_gateway" "public_us_east_1" {
   vpc_id = "${aws_vpc.main.id}"
 
+  enable_dns_hostnames = true
+
   tags {
 	Name = "public_us_east_1"
   }
