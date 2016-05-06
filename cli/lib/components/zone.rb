@@ -28,15 +28,26 @@ module Jet
           :public_cidr_block => params[:public_cidr_block] || get_next_cidr_block,
           :private_cidr_block => params[:private_cidr_block] || get_next_cidr_block
         }
+        @type = "zone"
       end
 
       def self.deserialize(object)
-        return self.class.new(object.properties)
+        return Zone.new(object[:properties])
       end
 
       def render
         renderer = ERB.new File.read("./lib/components/templates/zone.tf.erb")
         return renderer.result(binding)
+      end
+
+      def hash
+        return "zone__#{@properties[:az]}"
+      end
+
+      def dependencies
+        return [
+          "base"
+        ]
       end
 
       def get_next_cidr_block

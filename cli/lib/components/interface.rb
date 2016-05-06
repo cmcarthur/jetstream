@@ -12,8 +12,10 @@ module Jet
       def serialize
         return {
           :name => hash,
-          :dependencies => dependencies.map { |x| x.hash },
-          :properties => @properties
+          :type => @type,
+          :dependencies => dependencies,
+          :properties => @properties,
+          :ref => nil
         }
       end
     end

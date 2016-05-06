@@ -30,7 +30,7 @@ describe Jet::Renderer do
 
   describe "render_all!" do
     it "should render base only" do
-      repository = Jet::Component::Repository.new([@base])
+      repository = Jet::Repository.new([@base])
 
       renderer = Jet::Renderer.new(repository)
       renderer.render_all!
@@ -41,7 +41,7 @@ describe Jet::Renderer do
     end
 
     it "should render base and zone" do
-      repository = Jet::Component::Repository.new([@base, @zone])
+      repository = Jet::Repository.new([@base, @zone])
 
       renderer = Jet::Renderer.new(repository)
       renderer.render_all!
@@ -52,7 +52,7 @@ describe Jet::Renderer do
     end
 
     it "should FAIL when rendering zone only" do
-      repository = Jet::Component::Repository.new([@zone])
+      repository = Jet::Repository.new([@zone])
 
       renderer = Jet::Renderer.new(repository)
 

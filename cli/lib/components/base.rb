@@ -6,14 +6,19 @@ module Jet
     class Base < Interface
       def initialize(params = {})
         @properties = {}
+        @type = "base"
       end
 
       def hash
         return "base"
       end
 
+      def dependencies
+        return []
+      end
+
       def self.deserialize(object)
-        return self.class.new(object.properties)
+        return Base.new(object[:properties])
       end
 
       def render
