@@ -1,29 +1,29 @@
-resource "aws_subnet" "public_<%= @az %>" {
+resource "aws_subnet" "public_<%= @properties[:az] %>" {
   vpc_id = "${aws_vpc.main.id}"
-  cidr_block = "<%= @get_next_cidr_block() %>"
-  availability_zone = "<%= @az %>"
+  cidr_block = "<%= @properties[:public_cidr_block] %>"
+  availability_zone = "<%= @properties[:az] %>"
 
   tags {
-	Name = "public_<%= @az %>"
+	Name = "public_<%= @properties[:az] %>"
   }
 }
 
-resource "aws_subnet" "private_<%= @az %>" {
+resource "aws_subnet" "private_<%= @properties[:az] %>" {
   vpc_id = "${aws_vpc.main.id}"
-  cidr_block = "<%= @get_next_cidr_block() %>"
-  availability_zone = "<%= @az %>"
+  cidr_block = "<%= @properties[:private_cidr_block] %>"
+  availability_zone = "<%= @properties[:az] %>"
 
   tags {
-	Name = "private_<%= @az %>"
+	Name = "private_<%= @properties[:az] %>"
   }
 }
 
-resource "aws_route_table_association" "public_<%= @az %>" {
-  subnet_id = "${aws_subnet.public_<%= @az %>.id}"
+resource "aws_route_table_association" "public_<%= @properties[:az] %>" {
+  subnet_id = "${aws_subnet.public_<%= @properties[:az] %>.id}"
   route_table_id = "${aws_route_table.public.id}"
 }
 
-resource "aws_route_table_association" "private_<%= @az %>" {
-  subnet_id = "${aws_subnet.private_<%= @az %>.id}"
-  route_table_id = "${aws_route_table.private_<%= @az %>.id}"
+resource "aws_route_table_association" "private_<%= @properties[:az] %>" {
+  subnet_id = "${aws_subnet.private_<%= @properties[:az] %>.id}"
+  route_table_id = "${aws_route_table.private_<%= @properties[:az] %>.id}"
 }
