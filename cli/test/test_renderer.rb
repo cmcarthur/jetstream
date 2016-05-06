@@ -50,5 +50,15 @@ describe Jet::Renderer do
         assert(component[:ref])
       end
     end
+
+    it "should FAIL when rendering zone only" do
+      repository = Jet::Component::Repository.new([@zone])
+
+      renderer = Jet::Renderer.new(repository)
+
+      assert_raises ArgumentError do
+        renderer.render_all!
+      end
+    end
   end
 end

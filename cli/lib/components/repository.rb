@@ -11,8 +11,21 @@ module Jet
         "zone" => Jet::Component::Zone
       }
 
+      def dependencies_met?(component)
+        return component[:dependencies].all? do |dependency|
+          @state.any? do |component|
+            component[:name] == dependency
+          end
+        end
+      end
+
       def build!(component)
         klass = COMPONENT_TYPES[component[:type]]
+
+        if not dependencies_met?(component)
+          raise ArgumentError.new("One or more dependencies were not met for #{component}.")
+        end
+
         component[:ref] = klass.new(component[:properties])
         return component
       end
