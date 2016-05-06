@@ -1,4 +1,4 @@
-require './lib/renderer.rb'
+require './lib/renderer'
 
 require 'minitest'
 require 'minitest/autorun'

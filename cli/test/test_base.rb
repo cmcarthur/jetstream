@@ -1,4 +1,4 @@
-require './lib/components/base.rb'
+require './lib/components/base'
 
 require 'minitest'
 require 'minitest/autorun'

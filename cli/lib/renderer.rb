@@ -1,4 +1,4 @@
-require './lib/components/repository'
+require './lib/repository'
 
 module Jet
   class Renderer

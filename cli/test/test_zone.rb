@@ -1,4 +1,4 @@
-require './lib/components/zone.rb'
+require './lib/components/zone'
 
 require 'minitest'
 require 'minitest/autorun'
