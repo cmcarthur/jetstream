@@ -42,9 +42,8 @@ COPY cli/Gemfile* /tmp/
 WORKDIR /tmp
 RUN bundle install
 
-ENTRYPOINT ["/data/cli/bin/jet"]
+ENTRYPOINT ["/usr/lib/jetstream/cli/bin/jet"]
 
-VOLUME ["/data"]
-VOLUME ["/workdir"]
+VOLUME ["/usr/lib/jetstream"]
 
-WORKDIR /workdir
+WORKDIR "/usr/lib/jetstream/cli"
